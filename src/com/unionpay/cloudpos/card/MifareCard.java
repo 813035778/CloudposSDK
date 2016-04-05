@@ -13,7 +13,7 @@ package com.unionpay.cloudpos.card;
 import com.unionpay.cloudpos.DeviceException;
 
 /**
- * 非接触式Mifare卡的接口定义。符合MIFAREI国际标准，容量为8K位.是memory卡的一种。
+ * 非接触式Mifare卡的接口定义。符合MIFAREI国际标准，是memory卡的一种。
  * 
  * 
  * @date August 7, 2015
@@ -50,7 +50,7 @@ public interface MifareCard extends MemoryCard {
      * 
      * @param sectorIndex      分区ID。
      * @param blockOfSector    block索引号。
-     * @return  the data buffer block的数据。
+     * @return  block的数据。
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。     
      */
     byte[] readBlock(int sectorIndex, int blockOfSector) throws DeviceException;

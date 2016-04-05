@@ -12,8 +12,8 @@ package com.unionpay.cloudpos.card;
 
 import com.unionpay.cloudpos.DeviceException;
 /**
- * Mifare UltraLight又称为MF0，遵守ISO14443A协议，存储容量只有512bit(Mifare S50有8192bit)。
- * Mifare UltraLight的卡序列号有7个字节，没有密码，不需要验证，有16个BLOCK，且每个BLOCK只有4个字节，没有电子钱包功能.
+ * Mifare UltraLight又称为MF0，遵守ISO14443A协议。
+ * Mifare UltraLight的卡序列号有7个字节，没有密码，不需要验证，每个BLOCK只有4个字节，没有电子钱包功能.
  * 适合一次性、不需要回收的低成本的电子票证、景区门票等场合的解决方案
  * <p>属于memory card的一种.
  * 

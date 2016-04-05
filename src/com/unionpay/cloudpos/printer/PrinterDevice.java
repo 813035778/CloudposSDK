@@ -24,7 +24,7 @@ import com.unionpay.cloudpos.TimeConstants;
  * PrinterDevice printerDevice =
  *         (PrinterDevice) POSTerminal.getInstance().getDevice("cloudpos.device.printer");
  * </pre>
- * 其中，"cloudpos.device.printer"是标识磁条卡读卡器的字符串，由具体的实现定义。
+ * 其中，"cloudpos.device.printer"是标识打印机的字符串，由具体的实现定义。
  * <p>使用打印机设备对象可以打印文本，图片，条码，并且可以发送ESC指令。 
  * <p>为了正常访问打印机设备，请在Android Manifest文件中设置打印机访问权限，具体如下所示：
  * <pre> &lt;uses-permission android:name="android.permission.CLOUDPOS_PRINTER"/>
