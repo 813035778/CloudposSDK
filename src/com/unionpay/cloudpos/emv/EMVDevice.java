@@ -12,6 +12,7 @@ package com.unionpay.cloudpos.emv;
 import java.util.List;
 
 import com.unionpay.cloudpos.Device;
+import com.unionpay.cloudpos.DeviceException;
 import com.unionpay.cloudpos.OperationListener;
 import com.unionpay.cloudpos.OperationResult;
 import com.unionpay.cloudpos.TimeConstants;
@@ -29,16 +30,17 @@ public interface EMVDevice extends Device{
     /**
      * 配置终端设备参数。
      * @param config 终端配置。
-     *
+     * @return 是否设置成功。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    void setTermConfig(EMVTermConfig config);
+    void setTermConfig(EMVTermConfig config)  throws DeviceException;
     
     /**
      * 获取终端设备参数。
      * @return EMVTermConfig 终端配置。
-     *
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    EMVTermConfig getTermConfig();
+    EMVTermConfig getTermConfig()  throws DeviceException;
     
     /**
      * 检卡流程，在这个流程中打开指定的卡，并进入等卡逻辑。如果检测到卡，通过listener通知给应用。
@@ -67,100 +69,113 @@ public interface EMVDevice extends Device{
      * 
      * @see OperationListener#handleResult
      * @see EMVCardReaderResult
-     *
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    void readCard (int timeout, boolean icCard, boolean rfCard, OperationListener listener);
+    void readCard (int timeout, boolean icCard, boolean rfCard, OperationListener listener)  throws DeviceException;
     
     /**
      * 结束检卡。
      * <p>结束检卡会取消之前的异步读卡，并关闭读卡设备。
-     *
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    void stopReadCard();
+    void stopReadCard()  throws DeviceException;
     
     /**
      * 处理EMV流程。
      * <p>结束检卡会取消之前的异步读卡，并关闭读卡设备。
      * @param transData EMV交易数据。
      * @param listener EMV交易监听器，应用通过监听器得到需要的数据，处理确认之后，通过返回值，告诉EMVSDK实现进入下一步流程。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    void process(EMVTransData transData, EMVTransListener listener);
+    void process(EMVTransData transData, EMVTransListener listener)  throws DeviceException;
     
     /**
      * 设置TAG值。
      * @param tag 
      * @param value 
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    void setTLV(int tag, byte[] value);
+    void setTLV(int tag, byte[] value)  throws DeviceException;
     
     /**
      * 获取指定TAG列表数据。
      * @param tags  tag列表。
      * @return byte[] TLV串。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    byte[] getTLVList(List<Integer> tags);
+    byte[] getTLVList(List<Integer> tags)  throws DeviceException;
     
     /**
      * 查询电子现金余额流程。
      * @param channelType  0（{@link EMVConstants#Channel_Type_IC}）：接触式；1（{@link EMVConstants#Channel_Type_RF}）：非接触式。
      * @return Balance 电子现金余额。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    Balance queryECBalance(int channelType);
+    Balance queryECBalance(int channelType)  throws DeviceException;
     
     /**
      * 查询卡片交易记录流程。
      * @param channelType  0（{@link EMVConstants#Channel_Type_IC}）：接触式；1（{@link EMVConstants#Channel_Type_RF}）：非接触式。
      * @return List<EMVCardLog> 卡片交易记录。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    List<EMVCardLog> queryLogRecord(int channelType);
+    List<EMVCardLog> queryLogRecord(int channelType)  throws DeviceException;
     
     /**
-     * 设置AID参数。
+     * 设置AID参数。这个参数必须TLV格式的一条参数。
      * @param AIDParam  
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    void setAIDParam(byte[] AIDParam);
+    void setAIDParam(byte[] AIDParam)  throws DeviceException;
     
     /**
      * 获取AID参数。
-     * @return AIDParam  
+     * @return AIDParam List。List中的每个byte[]是一条TLV格式的参数。 
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    byte[] getAIDParam();
+    List<byte[]> getAIDParam()  throws DeviceException;
     
     /**
      * 解析AID参数。
-     * <p>传入TLV格式的AID参数，解析成EMVAIDParam的list.
+     * <p>传入TLV格式的AID参数，解析成EMVAIDParam.
      * @param AIDParam
-     * @return List<EMVAIDParam>  
+     * @return EMVAIDParam  
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    List<EMVAIDParam> parseAIDParam (byte[] AIDParam);
+    EMVAIDParam parseAIDParam (byte[] AIDParam)  throws DeviceException;
     
     /**
      * 清除AID参数。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    void clearAIDParam ();
+    void clearAIDParam ()  throws DeviceException;
     
     /**
-     * 设置公钥参数。
+     * 设置公钥参数。这个参数必须TLV格式的一条参数。
      * @param CAPKParam 公钥参数。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    void setCAPKParam (byte[] CAPKParam);
+    void setCAPKParam (byte[] CAPKParam)  throws DeviceException;
     
     /**
      * 获取公钥参数。
-     * @return 公钥参数。
+     * @return 公钥参数  List。List中的每个byte[]是一条TLV格式的参数。 
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    byte[] getCAPKParam ();
+    List<byte[]> getCAPKParam ()  throws DeviceException;
     
     /**
      * 解析公钥参数。
-     * <p>传入TLV格式的公钥参数，解析成EMVCAPKParam的list.
+     * <p>传入TLV格式的公钥参数，解析成EMVCAPKParam.
      * @param CAPKParam
-     * @return List<EMVAIDParam>。
+     * @return EMVAIDParam。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    List<EMVCAPKParam> parseCAPKParam (byte[] CAPKParam);
+    EMVCAPKParam parseCAPKParam (byte[] CAPKParam)  throws DeviceException;
     
     /**
      * 清除公钥参数。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
      */
-    void clearCAPKParam ();
+    void clearCAPKParam ()  throws DeviceException;
 }
