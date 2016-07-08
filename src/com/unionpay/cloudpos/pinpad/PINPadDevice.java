@@ -137,19 +137,28 @@ public interface PINPadDevice extends Device {
      *  @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      * */
     void clearText() throws DeviceException;
-
+    
+    /**
+     * 更新主密钥。 
+     * @param masterKeyID 主密钥索引
+     * @param oldMasterKey 原主密钥
+     * @param newMasterKey 新主密钥
+     * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
+     */
+    void updateMasterKey(int masterKeyID, byte[] oldMasterKey,byte[] newMasterKey) throws DeviceException;
+    
     /**
      * 修改用户密钥，一般用于主密钥/会话密钥算法。
      * <p>用来更新的用户密钥数据是密文，是由给定的主密钥加密，因此更新时需要指定所使用的主密钥索引。
      * 用户密钥约定使用的是3des算法。
      * @param masterKeyID 用来解密的主密钥索引。
-     * @param userKeyType    需要更新的用户密钥类型。
+     * @param userKeyID    需要更新的用户密钥类型：{@link #USER_KEY_ID_PIN}, {@link #USER_KEY_ID_MAC}, {@link #USER_KEY_ID_DATA}。
      * @param cipherNewUserKey   被主密钥加过密的用户密钥数据。
      * @param checkType	校验位校验类型：{@link #CHECK_TYPE_NONE}, {@link #CHECK_TYPE_CUP  }。
      * @param checkValue	校验pinpad。
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    void updateUserKey(int masterKeyID, int userKeyType , byte[] cipherNewUserKey,int checkType , byte[] checkValue)  throws DeviceException;
+    void updateUserKey(int masterKeyID, int userKeyID , byte[] cipherNewUserKey,int checkType , byte[] checkValue)  throws DeviceException;
    
     /**
      * 修改用户密钥，一般用于主密钥/会话密钥算法。
@@ -157,11 +166,11 @@ public interface PINPadDevice extends Device {
      * 用来更新的用户密钥数据是密文，是由给定的主密钥加密，因此更新时需要指定所使用的主密钥索引。
      * 用户密钥约定使用的是3des算法。
      * @param masterKeyID 用来解密的主密钥索引。
-     * @param userKeyType    需要更新的用户密钥类型。
+     * @param userKeyID    需要更新的用户密钥类型：{@link #USER_KEY_ID_PIN}, {@link #USER_KEY_ID_MAC}, {@link #USER_KEY_ID_DATA}。
      * @param cipherNewUserKey   被主密钥加过密的用户密钥数据    。
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    void updateUserKey(int masterKeyID, int userKeyType , byte[] cipherNewUserKey)  throws DeviceException;
+    void updateUserKey(int masterKeyID, int userKeyID , byte[] cipherNewUserKey)  throws DeviceException;
    
     /**
      * 按照KeyInfo中选定的密钥进行数据加密，通常用于计算用户数据等操作。
