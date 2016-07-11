@@ -29,6 +29,7 @@ import com.unionpay.cloudpos.TimeConstants;
  * <p>为了正常访问打印机设备，请在Android Manifest文件中设置打印机访问权限，具体如下所示：
  * <pre> &lt;uses-permission android:name="android.permission.CLOUDPOS_PRINTER"/>
  * </pre> 
+ * 对于缓冲型打印机，可能在close方法调用时，开始处理打印。
  * @date August 06, 2015
  * @see Device
  */
