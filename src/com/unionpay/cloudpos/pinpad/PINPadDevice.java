@@ -87,12 +87,12 @@ public interface PINPadDevice extends Device {
     int CHECK_TYPE_NONE = 0; 
     
     /**
-     *  校验位的校验方式之一，无校验位验证。
+     *  校验位的校验方式之一，银联标准算法验证。
      *  <p>
      *  用于更新工作密钥时使用。
-     *  用PIN key 对校验数据的8个字节进行计算，取头四个字节进行校验。
+     *  校验值使用银联标准算法，即用User key 对8个字节0进行加密，取前四个字节进行校验。
      * */
-    int CHECK_TYPE_CUP = 0; 
+    int CHECK_TYPE_CUP = 1; 
     
 
     /**
