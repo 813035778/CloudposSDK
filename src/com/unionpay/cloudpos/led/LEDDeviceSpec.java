@@ -19,11 +19,11 @@ import com.unionpay.cloudpos.DeviceSpec;
  */
 public interface LEDDeviceSpec extends DeviceSpec {
 	
-	byte RED = 0x01;
-	byte YELLOW =0x02;
-	byte GREEN = 0x04;
-	byte BLUE = 0x08;
-	byte WHITE = 0x10;
+    public static final byte RED = 0x01;
+    public static final byte YELLOW =0x02;
+    public static final byte GREEN = 0x04;
+    public static final byte BLUE = 0x08;
+    public static final byte WHITE = 0x10;
 	/**
 	 *  返回可以操作的LED灯数量。
 	 *  <p>
@@ -35,7 +35,7 @@ public interface LEDDeviceSpec extends DeviceSpec {
 	*  返回LED设备的颜色。
      * <p>
      * @param logicalID  设备逻辑ID
-	 * @return int 颜色，参数错误及不支持返回null.
+	 * @return 颜色数组，数组元素的取值参照本接口常量定义。参数错误及不支持返回null.
 	 * */
 	byte[] getColors(int logicalID); 
 	
