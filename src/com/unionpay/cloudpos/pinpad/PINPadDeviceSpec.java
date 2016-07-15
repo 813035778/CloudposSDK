@@ -28,7 +28,7 @@ public interface PINPadDeviceSpec extends DeviceSpec {
 	/**
 	 *  是否是内置PIN输入设备。
 	 *  <p>如果是内置，那么系统提供密码输入界面。
-     * @param logicalID 设备逻辑ID，默认1
+     * @param logicalID 设备逻辑ID，默认0
      * @return {@code true} 内置PIN输入设备， {@code false} 外置PIN输入设备，参数错误及不支持也返回false.
 	 * */
 	boolean isInternal(int logicalID);
@@ -36,7 +36,7 @@ public interface PINPadDeviceSpec extends DeviceSpec {
 	/**
 	 *  是否支持获取随机数。
 	 *  <p>
-     *  @param logicalID 设备逻辑ID，默认1
+     *  @param logicalID 设备逻辑ID，默认0
 	 *  @return {@code true} 支持取随机数， {@code false} 不支持取随机数，参数错误也返回false.
 	 * */    
 	boolean canGetRandom(int logicalID);
@@ -44,7 +44,7 @@ public interface PINPadDeviceSpec extends DeviceSpec {
 	/**
 	 *  是否支持显示文本。
 	 *  <p>
-     *  @param logicalID 设备逻辑ID，默认1
+     *  @param logicalID 设备逻辑ID，默认0
 	 *  @return {@code true} 支持， {@code false} 不支持，参数错误也返回false.
 	 * */
 	boolean canShowText(int logicalID);
