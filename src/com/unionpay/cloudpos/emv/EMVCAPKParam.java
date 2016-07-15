@@ -14,31 +14,31 @@ import java.util.Map;
 
 public class EMVCAPKParam {
 
-    /* 应用注册服务ID*/
+    /** 应用注册服务ID*/
     private String RID;
     
-    /* 密钥索引*/
+    /** 密钥索引*/
     private int keyID;
     
-    /* HASH算法标志,SM算法时，值为07*/
+    /** HASH算法标志,SM算法时，值为07*/
     private int hashInd;
     
-    /* RSA算法标志，SM算法时，值为04*/
+    /** RSA算法标志，SM算法时，值为04*/
     private int arithInd;
 
-    /* 模，SM算法时，为公钥值*/
+    /** 模，SM算法时，为公钥值*/
     private String modul;
 
-    /* 指数，SM算法时，为0，不检查此数据项*/
+    /** 指数，SM算法时，为0，不检查此数据项*/
     private String exponent;
 
-    /* 有效期（YYMMDD）*/
+    /** 有效期（YYMMDD）*/
     private String expDate;
 
-    /* 密钥校验和*/
+    /** 密钥校验和*/
     private String checkSum;
 
-    /* 扩展域*/
+    /** 扩展域*/
     private Map<String,Object> extField;
     
 

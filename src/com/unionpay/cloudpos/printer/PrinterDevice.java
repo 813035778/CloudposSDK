@@ -75,12 +75,12 @@ public interface PrinterDevice extends Device, TimeConstants
     /**
      * CODE93。
      */
-	public static final int BARCODE_CODE93 = 72;
+	public static final int BARCODE_CODE93 = 7;
 	
     /**
      * CODE128。
      */
-	public static final int BARCODE_CODE128 = 73;
+	public static final int BARCODE_CODE128 = 8;
 
 	/**
 	 * 没有HRI字符。
@@ -105,7 +105,7 @@ public interface PrinterDevice extends Device, TimeConstants
     /**
      * 缺少打印纸张。
      * */
-    public static final int STATUS_OUT_OF_PAPER = -101;
+    public static final int STATUS_OUT_OF_PAPER = 0;
     /**
      * 打印机中已存在纸张。
      * */
@@ -190,7 +190,8 @@ public interface PrinterDevice extends Device, TimeConstants
    /**
     *  查询打印机纸张状态
     *  
-    *  @return {@code -101} 缺纸 ,{@code 1}打印机状态正常 ,{@code -102} 打印机异常 .    
+    *  @return {@link #STATUS_OUT_OF_PAPER} 缺纸 ,{@link #STATUS_PAPER_EXIST}打印机状态正常 .  
+    *  @throws DeviceException 参考{@link DeviceException DeviceException}中的定义。  
     * */
    int queryStatus() throws DeviceException;
    

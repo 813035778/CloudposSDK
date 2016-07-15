@@ -14,46 +14,48 @@ import java.util.Map;
 
 public class EMVTransData {
     
-    /* 交易金额*/
+    /** 交易金额*/
     private long amount;    
 
-    /* 其他金额*/
+    /** 其他金额*/
     private long otherAmount;
 
-    /* 交易类型*/
+    /** 交易类型
+     * 取值按银联规范,域3中交易处理码的第一个字节。
+     * */
     private byte transType;
 
-    /* 交易日期，YYYYMMDD*/
+    /** 交易日期，YYYYMMDD*/
     private String transDate;
 
-    /* 交易时间，HHMMSS*/
+    /** 交易时间，HHMMSS*/
     private String transTime;
 
-    /* 交易序号*/
+    /** 交易序号*/
     private String traceNo;
 
-    /* 是否支持国密*/
+    /** 是否支持国密*/
     private boolean isSupportSM;
 
-    /* 是否执行脱机数据认证*/
+    /** 是否执行脱机数据认证*/
     private boolean isCardAuth;
 
-    /* 是否强制联机*/
+    /** 是否强制联机*/
     private boolean isForceOnline;
 
-    /* 是否电子现金交易*/
+    /** 是否电子现金交易*/
     private boolean isSupportEC;
 
-    /* 是否执行CVM*/
+    /** 是否执行CVM*/
     private boolean isSupportCVM;
 
-    /* 流程类型，0x01：标准的授权过程；0x02：简易流程；0x03：qPBOC流程*/
+    /** 流程类型，0x01：标准的授权过程；0x02：简易流程；0x03：qPBOC流程*/
     private int flow;
 
-    /* 通道类型，0：接触式 ；1：非接触式*/
+    /** 通道类型，0：接触式 ；1：非接触式*/
     private int channelType;
 
-    /* 扩展域*/
+    /** 扩展域*/
     private Map<String,Object> extField;
     
     /**

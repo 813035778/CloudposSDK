@@ -11,13 +11,13 @@
 package com.unionpay.cloudpos.emv;
 
 public class Balance {
-    /* 第一货币代码  */
+    /** 第一货币代码  */
     private String firstCurrencyCode;
-    /* 第一余额 */
+    /** 第一余额 */
     private long firstCurrencyBalance;
-    /* 第二货币代码  */
+    /** 第二货币代码  */
     private String secondCurrencyCode;
-    /* 第二余额 */
+    /** 第二余额 */
     private long secondCurrencyBalance;
 
     /**

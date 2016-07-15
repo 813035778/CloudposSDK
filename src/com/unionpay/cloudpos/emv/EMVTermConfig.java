@@ -16,46 +16,46 @@ import com.unionpay.cloudpos.OperationResult;
 
 public class EMVTermConfig {
     
-    /* 参考货币代码和交易代码的转换系数（交易货币对参考货币的汇率*1000）*/
+    /** 参考货币代码和交易代码的转换系数（交易货币对参考货币的汇率*1000）*/
     private long referCurrCon;
 
-    /* 商户名*/
+    /** 商户名*/
     private String merchName;
 
-    /* 商户类别码（没要求可不设置）*/
+    /** 商户类别码（没要求可不设置）*/
     private String merchCateCode;
 
-    /* 商户标志（商户号）*/
+    /** 商户标志（商户号）*/
     private String merchId;
 
-    /* 终端标志（POS号）*/
+    /** 终端标志（POS号）*/
     private String termId;
 
-    /* 终端类型，表明终端环境、通讯能力和操作控制，9F35（tag）（参考PBOC规范）*/
+    /** 终端类型，表明终端环境、通讯能力和操作控制，9F35（tag）（参考PBOC规范）*/
     private int termType;
 
-    /* 终端性能，表示终端的卡片数据输入，CVM和安全能力，9F33（tag）（参考PBOC规范）*/
+    /** 终端性能，表示终端的卡片数据输入，CVM和安全能力，9F33（tag）（参考PBOC规范）*/
     private String capability;
 
-    /* 附加终端性能，表明终端的数据输入输出能力（参考PBOC规范）*/
+    /** 附加终端性能，表明终端的数据输入输出能力（参考PBOC规范）*/
     private String extCapability;
     
-    /* 交易货币代码，表示根据ISO 4217规定的交易货币代码*/
+    /** 交易货币代码，表示根据ISO 4217规定的交易货币代码*/
     private String transCurrCode;
     
-    /* 交易货币指数，表示根据ISO 4217规定的从交易金额右起的隐含小数点位置*/
+    /** 交易货币指数，表示根据ISO 4217规定的从交易金额右起的隐含小数点位置*/
     private int transCurrExp;
 
-    /* 参考货币代码*/
+    /** 参考货币代码*/
     private String referCurrCode;
 
-    /* 参考货币指数*/
+    /** 参考货币指数*/
     private int referCurrExp;
 
-    /* 终端国家代码，标识根据ISO3166表示的终端国家代码，9F1A（tag）*/
+    /** 终端国家代码，标识根据ISO3166表示的终端国家代码，9F1A（tag）*/
     private String countryCode;
 
-    /* 扩展域*/
+    /** 扩展域*/
     private Map<String,Object> extField;
     
     /**

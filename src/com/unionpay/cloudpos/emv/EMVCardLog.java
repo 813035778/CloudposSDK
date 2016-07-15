@@ -12,61 +12,61 @@ package com.unionpay.cloudpos.emv;
 
 public class EMVCardLog {
     
-    /* 交易金额存在标识*/
+    /** 交易金额存在标识*/
     private boolean isAmountExist;
 
-    /* 交易金额*/
+    /** 交易金额*/
     private long amount;
 
-    /* 其它金额存在标识*/
+    /** 其它金额存在标识*/
     private boolean isOtherAmountExist;
 
-    /* 其它金额*/
+    /** 其它金额*/
     private long otherAmount;
 
-    /* 交易日期（YYMMDD）存在标识*/
+    /** 交易日期（YYMMDD）存在标识*/
     private boolean isDateExist;
 
-    /* 交易日期（YYMMDD）*/
+    /** 交易日期（YYMMDD）*/
     private String transDate;
 
-    /* 交易时间存在标识*/
+    /** 交易时间存在标识*/
     private boolean isTimeExist;
 
-    /* 交易时间*/
+    /** 交易时间*/
     private String transTime;
 
-    /* 国家代码存在标识*/
+    /** 国家代码存在标识*/
     private boolean isCountryCodeExist;
 
-    /* 国家代码（9F1A）*/
+    /** 国家代码（9F1A）*/
     private String countryCode;
 
-    /* 货币代码存在标识*/
+    /** 货币代码存在标识*/
     private boolean isCurrencyExist;
 
-    /* 货币代码（5F2A）*/
+    /** 货币代码（5F2A）*/
     private String currencyCode;
 
-    /* 交易计数器存在标识*/
+    /** 交易计数器存在标识*/
     private boolean isATCExist;
 
-    /* 交易计数器（9F36）*/
+    /** 交易计数器（9F36）*/
     private String ATC;
     
-    /* 交易类型存在标识*/
+    /** 交易类型存在标识*/
     private boolean isTransTypeExist;
 
-    /* 交易类型（9C）*/
+    /** 交易类型（9C）*/
     private byte transType;
 
-    /* 商户名称存在标识*/
+    /** 商户名称存在标识*/
     private boolean isMerchNameExist;
 
-    /* 商户名称（9F4E）*/
+    /** 商户名称（9F4E）*/
     private String merchName;
 
-    /* 本结构中未定义的其它数据元按照TLV 列表的格式保存在TLV中*/
+    /** 本结构中未定义的其它数据元按照TLV 列表的格式保存在TLV中*/
     private String otherTLVLog;
 
     /**

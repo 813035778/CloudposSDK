@@ -11,10 +11,10 @@
 package com.unionpay.cloudpos.emv;
 
 public class PINResult {
-    /* 结果值*/
+    /** 结果值*/
     private int resultCode;
     
-    /* 脱机密码*/
+    /** 脱机密码*/
     private byte[] pindata;
 
     /**

@@ -10,13 +10,13 @@
 package com.unionpay.cloudpos.emv;
 
 public class OnlineResult {
-    /* 联机交易结果值 0:成功；-1：取消；-2：失败*/
+    /** 联机交易结果值 0:成功；-1：取消；-2：失败*/
     private int resultCode;
     
-    /* 55域内容*/
+    /** 55域内容*/
     private byte[] field55;
     
-    /* 39域内容*/
+    /** 39域内容*/
     private byte[] Field39;
     
     /**

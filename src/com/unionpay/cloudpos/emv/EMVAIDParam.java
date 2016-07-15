@@ -16,85 +16,85 @@ public class EMVAIDParam {
 
     private String AID;
     
-    /* 选择标志（PART_MATCH 部分匹配FULL_MATCH 全匹配）
+    /** 选择标志（PART_MATCH 部分匹配FULL_MATCH 全匹配）
         0： PART_MATCH
         1： FULL_MATCH
      */
     private int selFlag;
     
-    /* 终端联机PIN支持能力*/
+    /** 终端联机PIN支持能力*/
     private boolean onlinePin;
     
-    /* 电子现金终端交易限额*/
+    /** 电子现金终端交易限额*/
     private long ECTTLVal;
 
-    /* 读卡器非接触CVM限额*/
+    /** 读卡器非接触CVM限额*/
     private long rdCVMLmt;
 
-    /* 读卡器非接触交易限额*/
+    /** 读卡器非接触交易限额*/
     private long rdClssTxnLmt;
 
-    /* 读卡器非接触脱机最低限额*/
+    /** 读卡器非接触脱机最低限额*/
     private long rdClssFLmt;
 
-    /* TTL存在?电子现金终端交易限额（EC Terminal Transaction Limit）*/
+    /** TTL存在?电子现金终端交易限额（EC Terminal Transaction Limit）*/
     private boolean ECTTLFlg;
 
-    /* 是否存在读卡器非接触脱机最低限额*/
+    /** 是否存在读卡器非接触脱机最低限额*/
     private boolean rdClssFLmtFlg;
 
-    /* 是否存在读卡器非接触交易限额*/
+    /** 是否存在读卡器非接触交易限额*/
     private boolean rdClssTxnLmtFlg;
 
-    /* 是否存在读卡器非接触CVM限额*/
+    /** 是否存在读卡器非接触CVM限额*/
     private boolean rdCVMLmtFlg;
 
-    /* 目标百分比数*/
+    /** 目标百分比数*/
     private int targetPer;
 
-    /* 最大目标百分比数*/
+    /** 最大目标百分比数*/
     private int maxTargetPer;
 
-    /* 是否检查最低限额*/
+    /** 是否检查最低限额*/
     private boolean floorlimitCheck;
 
-    /* 是否进行随机交易选择*/
+    /** 是否进行随机交易选择*/
     private boolean randTransSel;
 
-    /* 是否进行频度检测*/
+    /** 是否进行频度检测*/
     private boolean velocityCheck;
 
-    /* 最低限额*/
+    /** 最低限额*/
     private long floorLimit;
 
-    /* 阀值*/
+    /** 阀值*/
     private long threshold;
 
-    /* 终端行为代码（拒绝）*/
+    /** 终端行为代码（拒绝）*/
     private String tacDenial;
 
-    /* 终端行为代码（联机）*/
+    /** 终端行为代码（联机）*/
     private String tacOnline;
 
-    /* 终端行为代码（缺省）*/
+    /** 终端行为代码（缺省）*/
     private String tacDefault;
 
-    /* 收单行标志*/
+    /** 收单行标志*/
     private String acquierId;
 
-    /* 终端缺省DDOL*/
+    /** 终端缺省DDOL*/
     private String DDOL;
 
-    /* 终端缺省TDOL*/
+    /** 终端缺省TDOL*/
     private String TDOL;
 
-    /* 应用版本*/
+    /** 应用版本*/
     private String version;
 
-    /* 风险管理数据*/
+    /** 风险管理数据*/
     private String riskManageData;
 
-    /* 扩展域*/
+    /** 扩展域*/
     private Map<String, Object> extField;
 
     /**
