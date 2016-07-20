@@ -122,8 +122,8 @@ public interface HSMDevice extends Device{
      * <br>
      * 该操作是独占的。
      * 
-     * @param alias             证书的别名。
-     * @param aliasPrivateKey   证书对应的私钥别名。
+     * @param alias             证书的别名。如果注入的公钥证书是银联的公钥证书，那么证书的别名为client2048。
+     * @param aliasPrivateKey   证书对应的私钥别名。如果注入的公钥证书是银联的公钥证书，那么私钥别名为client2048。
      * @param bufCert           证书数据流。
      * @param dataFormat        证书数据格式，目前只支持{@link #CERT_FORMAT_PEM}。
      * @return {@code true} 成功。{@code false} 失败。
@@ -144,7 +144,7 @@ public interface HSMDevice extends Device{
      * 该操作是独占的。
      *  
      * @param certType      证书类型：{@link #CERT_TYPE_TERMINAL_OWNER}, {@link #CERT_TYPE_APP_ROOT} 或者 {@link #CERT_TYPE_COMM_ROOT}.
-     * @param alias         证书别名。
+     * @param alias         证书别名。如果注入的是银联通讯根证书，那么别名为trust01；如果注入的是银联应用根证书，那么别名为unionpay01。
      * @param bufCert       证书数据流。
      * @param dataFormat    数据流格式，目前只支持{@link #CERT_FORMAT_PEM}。
      * @return {@code true} 成功。{@code false} 失败。
