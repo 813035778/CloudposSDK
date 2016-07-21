@@ -95,7 +95,7 @@ public interface LEDDevice extends Device {
     void startBlink(long delayTurnOn, long delayTurnOff)  throws DeviceException;
     
     /**
-     * 取消LED设备闪烁，调用该方法，当前闪烁的LED设备会停止闪烁。
+     * 取消LED设备闪烁，调用该方法，当前闪烁的LED设备会停止闪烁。注意只能取消{@link #startBlink(byte, long, long, int)}及{@link #startBlink(long, long)}，
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      *  
      * */
