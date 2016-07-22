@@ -18,7 +18,32 @@ import java.util.HashMap;
  * @date August 06, 2015 
  */
 public class Format {
-	
+	public static final String FORMAT_DENSITY = "density";
+	public static final String FORMAT_DENSITY_LIGHT = "light";
+	public static final String FORMAT_DENSITY_MEDIUM = "medium";
+	public static final String FORMAT_DENSITY_DARK = "dark";
+	public static final String FORMAT_FONT_BOLD = "bold";
+	public static final String FORMAT_FONT_REVERSE = "reverse";
+	public static final String FORMAT_FONT_INVERSION = "inversion";
+	public static final String FORMAT_FONT_LINETHROUGH = "line-through";
+	public static final String FORMAT_FONT_ITALIC = "italic";
+	public static final String FORMAT_FONT_VAL_TRUE = "true";
+	public static final String FORMAT_FONT_VAL_FALSE = "false";
+	public static final String FORMAT_FONT_SIZE = "size";
+	public static final String FORMAT_FONT_SIZE_EXTRASMALL = "extra-small";
+	public static final String FORMAT_FONT_SIZE_SMALL = "small";
+	public static final String FORMAT_FONT_SIZE_MEDIUM = "medium";
+	public static final String FORMAT_FONT_SIZE_LARGE = "large";
+	public static final String FORMAT_FONT_SIZE_EXTRALARGE = "extra-large";
+	public static final String FORMAT_ALIGN = "align";
+	public static final String FORMAT_ALIGN_LEFT = "left";
+	public static final String FORMAT_ALIGN_RIGHT = "right";
+	public static final String FORMAT_ALIGN_CENTER = "center";
+	public static final String FORMAT_BARCODE_HRILOCATION = "HRI-location";
+	public static final String FORMAT_BARCODE_HRILOCATION_NONE = "none";
+	public static final String FORMAT_BARCODE_HRILOCATION_UP = "up";
+	public static final String FORMAT_BARCODE_HRILOCATION_DOWN = "down";
+	public static final String FORMAT_BARCODE_HRILOCATION_UPDOWN = "up-down";
 	private HashMap<String, String> mMap;
 
     public Format() {
@@ -91,7 +116,7 @@ public class Format {
         mMap.remove(key);
     }
     /**
-     * 清除所有打印格式.
+     * 清除format map中的格式.
      *
      */
     public void clear(){
