@@ -106,6 +106,14 @@ public interface EMVDevice extends Device{
     byte[] getTLVList(List<Integer> tags)  throws DeviceException;
     
     /**
+     * 获取指定TAG的数据。
+     * @param tag  TLV tag。
+     * @return byte[] TLV value。
+     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
+     */
+    byte[] getTLV(int tag)  throws DeviceException;
+    
+    /**
      * 查询电子现金余额流程。
      * @param channelType  0（{@link EMVConstants#Channel_Type_IC}）：接触式；1（{@link EMVConstants#Channel_Type_RF}）：非接触式。
      * @return Balance 电子现金余额。
@@ -136,15 +144,6 @@ public interface EMVDevice extends Device{
     List<byte[]> getAIDParam()  throws DeviceException;
     
     /**
-     * 解析AID参数。
-     * <p>传入TLV格式的AID参数，解析成EMVAIDParam.
-     * @param AIDParam
-     * @return EMVAIDParam  
-     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
-     */
-    EMVAIDParam parseAIDParam (byte[] AIDParam)  throws DeviceException;
-    
-    /**
      * 清除AID参数。
      * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
      */
@@ -164,15 +163,7 @@ public interface EMVDevice extends Device{
      */
     List<byte[]> getCAPKParam ()  throws DeviceException;
     
-    /**
-     * 解析公钥参数。
-     * <p>传入TLV格式的公钥参数，解析成EMVCAPKParam.
-     * @param CAPKParam
-     * @return EMVAIDParam。
-     * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。
-     */
-    EMVCAPKParam parseCAPKParam (byte[] CAPKParam)  throws DeviceException;
-    
+       
     /**
      * 清除公钥参数。
      * @throws DeviceException  具体定义参考{@link DeviceException DeviceException}的文档。 
