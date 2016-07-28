@@ -18,6 +18,18 @@ package com.unionpay.cloudpos.msr;
  */
 public interface MSRTrackData {
     /**
+     * 磁道索引0。    
+     */
+    public static final int TRACK_NO_0 = 0;
+    /**
+     * 磁道索引1。    
+     */
+    public static final int TRACK_NO_1 = 1;
+    /**
+     * 磁道索引2。    
+     */
+    public static final int TRACK_NO_2 = 2;
+    /**
      * 没有错误。
      * <p>
      * 该常量通过<code>getTrackError()</code>返回。
@@ -73,17 +85,21 @@ public interface MSRTrackData {
      */
     int NO_STRIPE           = 8;
     
+    
+    
     /**
      * 返回磁道信息。
      * <p>
      * <i>磁道信息参考：ISO 7811-2 and JIS X 6302.</i>
      * <p>
+     * @param trackNo:磁道索引，见常量定义：{@link #TRACK_NO_0}, {@link #TRACK_NO_1}, {@link #TRACK_NO_2}。
      * @return   磁道信息数据。
      */
     byte[] getTrackData(int trackNo);
     /**
      * 返回本磁道的错误标识。
      * <p>
+     * @param trackNo:磁道索引，见常量定义：{@link #TRACK_NO_0}, {@link #TRACK_NO_1}, {@link #TRACK_NO_2}。
      * @return  上述定义的磁道错误常量。
      * @see  #NO_ERROR
      * @see  #NON_SPECIFIC_ERROR
