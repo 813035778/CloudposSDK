@@ -131,6 +131,14 @@ public interface PrinterDevice extends Device, TimeConstants
    
    /**
     * 打印字符串。
+    * 打印完成后自动换行。
+    * @param  message 打印的字符串数据。
+    * @throws DeviceException 参考{@link DeviceException DeviceException}中的定义。
+    */
+   void printlnText(String message) throws DeviceException;
+   
+   /**
+    * 打印字符串。
     * 默认不换行，加\n 才换行。
     * <p>按照format对象中定义的格式来控制打印字符串。
     * 
@@ -139,15 +147,30 @@ public interface PrinterDevice extends Device, TimeConstants
     * @throws DeviceException 参考{@link DeviceException DeviceException}中的定义。
     */
    void printText(Format format, String message) throws DeviceException;
+   
+   /**
+    * 打印字符串。
+    * 打印完成后自动换行。
+    * <p>按照format对象中定义的格式来控制打印字符串。
+    * 
+    * @param format 用于控制字符串格式。
+    * @param  message 打印的字符串数据。
+    * @throws DeviceException 参考{@link DeviceException DeviceException}中的定义。
+    */
+   void printlnText(Format format, String message) throws DeviceException;
+   
    /**
     * 打印图片。
-    * 
+    * 打印完成后自动换行。
     * @param bitmap 
     * @throws DeviceException 参考{@link DeviceException DeviceException}中的定义。
     */
    void printBitmap(Bitmap bitmap) throws DeviceException;
+   
+   
    /**
     * 打印图片。
+    * 打印完成后自动换行。
     * <p>按照format对象中定义的格式来控制打印图片。
     * @param bitmap 
     * @param format 参考{@link Format Format}中的定义。
@@ -156,6 +179,7 @@ public interface PrinterDevice extends Device, TimeConstants
    void printBitmap(Format format,Bitmap bitmap) throws DeviceException;
    /**
     * 打印条码。
+    * 打印完成后自动换行。
     * <p>按照format对象中定义的格式来控制打印条码。
     * @param format 条码格式，参考{@link Format Format}中的定义。
     * @param barcodeType 见本接口定义的常量。

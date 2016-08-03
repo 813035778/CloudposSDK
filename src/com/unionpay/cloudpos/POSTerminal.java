@@ -12,8 +12,9 @@ package com.unionpay.cloudpos;
 
 import java.io.File;
 
-import dalvik.system.DexClassLoader;
 import android.content.Context;
+import android.util.Log;
+import dalvik.system.DexClassLoader;
 
 
 /**
@@ -51,6 +52,7 @@ public abstract class POSTerminal {
 	 *  系统属性
 	 * */
 	public static final String POS_TERMINAL_CLASS = "cloudpos.terminal.class";
+	public static final String POS_TERMINAL_INTERNAL_CLASS = "cloudpos.terminal.internal.class";
     private static POSTerminal self = null;
     
     /**
@@ -59,12 +61,18 @@ public abstract class POSTerminal {
     private static final String LOAD_JAR_PATH = "/data/cloudpossdk/cloudpossdkimpl.jar";
     
     protected static Context androidContext = null;
+    
+    private static final String DEFAULT_IMPL_CLASSNAME = "com.unionpay.cloudpos.impl.POSTerminalImpl";
      
 
     /**
      * 返回设备管理器的实例对象。终端系统默认的className是：“com.unionpay.cloudpos.impl.POSTerminalImpl”
-     * <p>可以通过System.setProperty(POSTerminal.POS_TERMINAL_CLASS, "com.unionpay.cloudpos.impl.POSTerminalImpl")设置系统属性。
+     * <p>通过System.setProperty(POSTerminal.POS_TERMINAL_CLASS, "厂商实现类名")设置/data/cloudpossdk/路径下的实现包的系统属性。
+     * <p>通过System.setProperty(POSTerminal.POS_TERMINAL_INTERNAL_CLASS, "厂商默认实现类名")设置系统中默认实现包的系统属性。
      * <p>如果未设置，将取默认名称。
+     * <p>获取POSTerminal的顺序是，首先寻找POS_TERMINAL_CLASS属性定义的class，由于加载了/data/cloudpossdk/路径，所以除了到系统路径下去找之后，也会到这个路径下去找，如果找到，就返回。
+     * 如果找不到，那么只到系统路径下去寻找POS_TERMINAL_INTERNAL_CLASS属性定义的class.厂商可以选择将实现包放到/data/cloudpossdk/路径下或者放到系统路径下或者两处都放。需要注意的是，
+     * 如果两处都放，实现的包名不要相同，不然优先加载系统中的实现包，/data/cloudpossdk/路径下的实现包将不会被加载。
      *
      * 
      * @return 设备管理器
@@ -75,10 +83,10 @@ public abstract class POSTerminal {
             Object terminalObj = null;
             String className = System.getProperty(POS_TERMINAL_CLASS);
             if(className==null){
-                className = "com.unionpay.cloudpos.impl.POSTerminalImpl";
+                className = DEFAULT_IMPL_CLASSNAME;
             }
             try {
-            	//从系统指定路径中加载sdk实现。
+            	//从系统及指定路径中加载sdk实现。
             	File dexOutputDir = context.getDir("dex", Context.MODE_PRIVATE);
             	DexClassLoader dexClassLoader = new DexClassLoader(LOAD_JAR_PATH, dexOutputDir.getAbsolutePath(), null,  POSTerminal.class.getClassLoader());// success
             	Class<?>  clazz = dexClassLoader.loadClass(className);
@@ -89,15 +97,20 @@ public abstract class POSTerminal {
     			}
     		} catch (Exception e) {
     			//无法从指定目录获得sdk对象。
-    			e.printStackTrace();
+//    			e.printStackTrace();
+    		    Log.i("获取POSTerminal","无法从系统classpath及/data/cloudpossdk/路径下获取"+className);
     		}
             
             if(self == null){
-//            	从系统中加载默认的sdk实现地址。
-            	 
+                //从系统中加载默认的sdk实现地址。
+                String internalclassName = System.getProperty(POS_TERMINAL_INTERNAL_CLASS);
+                if(internalclassName==null){
+                    internalclassName = DEFAULT_IMPL_CLASSNAME;
+                }
                  try {
-     				Class<?> clazz = Class.forName(className);
-     				// return the real implementation :cloudpos.terminal.class.
+     				Class<?> clazz = Class.forName(internalclassName);
+     				// return the real implementation :cloudpos.terminal.internal.class.
+     				Log.i("获取POSTerminal","从系统classpath中成功获取"+internalclassName);
      				terminalObj = clazz.newInstance();
      				if(terminalObj instanceof POSTerminal){
      					self = (POSTerminal)terminalObj;
