@@ -281,7 +281,10 @@ public class EMVUtils {
         tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
                 (byte) 0xdf, (byte) 0x05
         });
-        theCapkTable.setExpiry(new String(tmpData));
+        if (tmpData.length == 4)
+            theCapkTable.setExpiry(StringUtil.toHexString(tmpData));
+        else if (tmpData.length == 8)
+            theCapkTable.setExpiry(new String(tmpData));
 
         tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
                 (byte) 0xdf, (byte) 0x06
