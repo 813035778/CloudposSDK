@@ -160,8 +160,7 @@ public interface PrinterDevice extends Device, TimeConstants
    void printlnText(Format format, String message) throws DeviceException;
    
    /**
-    * 打印图片。
-    * 打印完成后自动换行。
+    * 打印图片。   
     * @param bitmap 
     * @throws DeviceException 参考{@link DeviceException DeviceException}中的定义。
     */
@@ -169,8 +168,7 @@ public interface PrinterDevice extends Device, TimeConstants
    
    
    /**
-    * 打印图片。
-    * 打印完成后自动换行。
+    * 打印图片。 
     * <p>按照format对象中定义的格式来控制打印图片。
     * @param bitmap 
     * @param format 参考{@link Format Format}中的定义。
@@ -178,8 +176,7 @@ public interface PrinterDevice extends Device, TimeConstants
     */
    void printBitmap(Format format,Bitmap bitmap) throws DeviceException;
    /**
-    * 打印条码。
-    * 打印完成后自动换行。
+    * 打印条码。   
     * <p>按照format对象中定义的格式来控制打印条码。
     * @param format 条码格式，参考{@link Format Format}中的定义。
     * @param barcodeType 见本接口定义的常量。
