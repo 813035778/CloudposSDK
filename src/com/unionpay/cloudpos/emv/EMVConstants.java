@@ -257,4 +257,15 @@ public interface EMVConstants {
     /** 发卡行自定义数据FCI*/
     public static final int TAG_BF0C = 0xBF0C;
     
+    //EMV_SDK ERROR CODE
+    public static final int ERR_NO_OPEN					= 1001;
+    public static final int ERR_TERMINALINFO 			= 1002;
+    public static final int ERR_AID_SET					= 1003;
+    public static final int ERR_CAPK_SET				= 1004;
+    
+    
+    
+    public static final int ERR_UNKNOWERR				= 1099;
+    
+    
 }

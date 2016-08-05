@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.unionpay.cloudpos.DeviceException;
 
-public class EMVUtils {
+public class EMVUtils  implements EMVConstants{
 
     /**
      * 解析AID参数。
@@ -127,25 +127,16 @@ public class EMVUtils {
     public static EMVCAPKParam parseCAPKParam(byte[] CAPKParam) throws DeviceException {
         EMVCAPKParam tmpEmvcapkParam = new EMVCAPKParam();
         CAPKTable tmpCapkTable = getCAPKParamInfo(CAPKParam);
-
-        // 设置capk属性
-        tmpEmvcapkParam.setArithInd(tmpCapkTable.getArithIndex()); /*
-                                                                    * RSA算法标志，SM算法时
-                                                                    * ，值为04 DF07
-                                                                    */
-        tmpEmvcapkParam.setRID(tmpCapkTable.getRID()); /* 应用注册服务ID 9F06 */
-        tmpEmvcapkParam.setKeyID(tmpCapkTable.getCapki()); /* 密钥索引 9F22 */
-        tmpEmvcapkParam.setHashInd(tmpCapkTable.getHashIndex()); /*
-                                                                  * HASH算法标志,SM算法时
-                                                                  * ，值为07 DF06
-                                                                  */
-        tmpEmvcapkParam.setModul(tmpCapkTable.getModul()); /* 模，SM算法时，为公钥值 DF02 */
-        tmpEmvcapkParam.setExponent(tmpCapkTable.getExponent()); /*
-                                                                  * 指数，SM算法时，为0，
-                                                                  * 不检查此数据项
-                                                                  */
-        tmpEmvcapkParam.setExpDate(tmpCapkTable.getExpiry()); /* 有效期（YYMMDD） */
-        tmpEmvcapkParam.setCheckSum(tmpCapkTable.getChecksum()); /* 密钥校验和 */
+        
+        //设置capk属性
+        tmpEmvcapkParam.setArithInd(tmpCapkTable.getArithIndex());      /* RSA算法标志，SM算法时，值为04     DF07 */
+        tmpEmvcapkParam.setRID(tmpCapkTable.getRID());                  /* 应用注册服务ID    9F06*/
+        tmpEmvcapkParam.setKeyID(tmpCapkTable.getCapki());              /* 密钥索引         9F22*/
+        tmpEmvcapkParam.setHashInd(tmpCapkTable.getHashIndex());        /* HASH算法标志,SM算法时，值为07      DF06*/
+        tmpEmvcapkParam.setModul(tmpCapkTable.getModul());              /* 模，SM算法时，为公钥值             DF02*/
+        tmpEmvcapkParam.setExponent(tmpCapkTable.getExponent());        /* 指数，SM算法时，为0，不检查此数据项*/
+        tmpEmvcapkParam.setExpDate(tmpCapkTable.getExpiry());           /* 有效期（YYMMDD）*/
+        tmpEmvcapkParam.setCheckSum(tmpCapkTable.getChecksum());        /* 密钥校验和*/
 
         /* 扩展域 */
         // private Map<String,Object> extField;
@@ -162,8 +153,18 @@ public class EMVUtils {
      * @return Map。
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      */
-    public static Map<Integer, byte[]> parseTLVList(byte[] tlvList) throws DeviceException {
-        return TlvUtils.builderTlvMap(StringUtil.toHexString(tlvList));
+    public static Map<Integer,byte[]> parseTLVList(byte[] tlvList) throws DeviceException{
+//		if(!isOpened)
+//		throw new DeviceException(ERR_NO_OPEN,"EmvDevice did not opened");
+    	
+    	 Map<Integer,byte[]> OutMap = null;
+    	 try {
+    		 OutMap = TlvUtils.builderTlvMap(StringUtil.toHexString(tlvList));
+		} catch (Exception e) {
+			new DeviceException(ERR_UNKNOWERR,e.toString());
+		}
+    	 
+        return OutMap;
     }
 
     private static AIDTable getEMVParamInfo(byte[] tmpdata)
@@ -263,47 +264,31 @@ public class EMVUtils {
         byte[] tmpData = null;
         System.arraycopy(data, 0, tlvData, 0, tlvData.length);
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0xdf, (byte) 0x02
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0xdf, (byte) 0x02});
         theCapkTable.setModul(ByteUtil.arrayToHexStr(tmpData));
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0x9f, (byte) 0x06
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0x9f, (byte) 0x06});
         theCapkTable.setRID(ByteUtil.arrayToHexStr(tmpData));
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0x9f, (byte) 0x22
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0x9f, (byte) 0x22});
         theCapkTable.setCapki(tmpData[0]);
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0xdf, (byte) 0x05
-        });
-        if (tmpData.length == 4)
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0xdf, (byte) 0x05});
+        if(tmpData.length==4)
             theCapkTable.setExpiry(StringUtil.toHexString(tmpData));
-        else if (tmpData.length == 8)
+        else if(tmpData.length == 8)
             theCapkTable.setExpiry(new String(tmpData));
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0xdf, (byte) 0x06
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0xdf, (byte) 0x06});
         theCapkTable.setHashIndex(tmpData[0]);
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0xdf, (byte) 0x07
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0xdf, (byte) 0x07});
         theCapkTable.setArithIndex(tmpData[0]);
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0xdf, (byte) 0x04
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0xdf, (byte) 0x04});
         theCapkTable.setExponent(ByteUtil.arrayToHexStr(tmpData));
 
-        tmpData = UtilityTLV.getTlvData(tlvData, new byte[] {
-                (byte) 0xdf, (byte) 0x03
-        });
+        tmpData = UtilityTLV.getTlvData(tlvData, new byte[]{(byte) 0xdf, (byte) 0x03});
         theCapkTable.setChecksum(ByteUtil.arrayToHexStr(tmpData));
 
         return theCapkTable;
