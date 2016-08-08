@@ -24,6 +24,9 @@ import com.unionpay.cloudpos.TimeConstants;
  *         (EMVDevice) POSTerminal.getInstance().getDevice("cloudpos.device.emv");
  * </pre>
  * 其中，"cloudpos.device.emv"是标识EMV的字符串，由具体的实现定义。
+ * <p>为了正常访问EMV，请在Android Manifest文件中设置EMV访问权限，具体如下所示：
+ * <pre> &lt;uses-permission android:name="android.permission.CLOUDPOS_EMV" /&gt;
+ * </pre>
  * @see Device
  */
 public interface EMVDevice extends Device{
