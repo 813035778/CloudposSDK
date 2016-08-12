@@ -268,11 +268,17 @@ public interface EMVConstants {
     public static final int ERR_UNKNOWERR				= 1099;
     
     //CERT TYPE
-    public static final String CERT_TYPE_SHENFENZHENG = "0";
-    public static final String CERT_TYPE_JUNGUANZHENG = "1";
-    public static final String CERT_TYPE_HUZHAO = "2";
-    public static final String CERT_TYPE_RUJINGZHENG = "3";
-    public static final String CERT_TYPE_LINSHISHENFENGZHENG = "4";
+    /** 身份证*/
+    public static final String CERT_TYPE_IDCARD = "0";
+    /** 军官证*/
+    public static final String CERT_TYPE_MILITARYID = "1";
+    /** 护照*/
+    public static final String CERT_TYPE_PASSPORT = "2";
+    /** 入境证*/
+    public static final String CERT_TYPE_ENTRYCARD = "3";
+    /** 临时身份证*/
+    public static final String CERT_TYPE_TEMPORARYIDCARD = "4";
+    /** 其他*/
     public static final String CERT_TYPE_QITA = "5";
     
     
