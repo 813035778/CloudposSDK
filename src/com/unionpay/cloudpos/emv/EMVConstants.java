@@ -267,5 +267,13 @@ public interface EMVConstants {
     
     public static final int ERR_UNKNOWERR				= 1099;
     
+    //CERT TYPE
+    public static final String CERT_TYPE_SHENFENZHENG = "0";
+    public static final String CERT_TYPE_JUNGUANZHENG = "1";
+    public static final String CERT_TYPE_HUZHAO = "2";
+    public static final String CERT_TYPE_RUJINGZHENG = "3";
+    public static final String CERT_TYPE_LINSHISHENFENGZHENG = "4";
+    public static final String CERT_TYPE_QITA = "5";
+    
     
 }
