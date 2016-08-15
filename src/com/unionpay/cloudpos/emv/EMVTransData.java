@@ -13,6 +13,9 @@ package com.unionpay.cloudpos.emv;
 import java.util.Map;
 
 public class EMVTransData {
+    public static final int TRANSDATA_FLOW_NORMAL = 0x01;
+    public static final int TRANSDATA_FLOW_SIMPLE = 0x02;
+    public static final int TRANSDATA_FLOW_QPBOC = 0x03;
     
     /** 交易金额*/
     private long amount;    
