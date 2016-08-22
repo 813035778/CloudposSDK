@@ -229,7 +229,25 @@ public interface PINPadDevice extends Device {
      * @return PIN block的密文。
      */
     PINPadOperationResult waitForPinBlock(KeyInfo keyInfo, String pan, boolean voicePrompt,  int timeout) throws DeviceException;
-
+    
+    /**
+     * 用于输入脱机pin，密码键盘不返回脱机PIN给上层，只通知调用者持卡人输入结果
+     * @param voicePrompt
+     * @param listener
+     * @param timeout
+     * @throws DeviceException
+     */
+    void listenForOfflinePin(boolean voicePrompt,  OperationListener listener,  int timeout) throws DeviceException;
+    
+    /**
+     * 用于输入脱机pin，密码键盘不返回脱机PIN给上层，只通知调用者持卡人输入结果
+     * @param voicePrompt
+     * @param timeout
+     * @return
+     * @throws DeviceException
+     */
+    PINPadOperationResult waitForOfflinePin(boolean voicePrompt,  int timeout) throws DeviceException;
+    
     /**
      * 按照KeyInfo中指定的密钥进行计算MAC。
      * <p>这里KeyInfo中，algorithm一般不需要指定。具体的MAC算法由macFlag参数指定。    
