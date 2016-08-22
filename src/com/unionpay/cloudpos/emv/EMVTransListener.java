@@ -51,7 +51,8 @@ public interface EMVTransListener {
     int onCertVerfiy(String certType, String certValue);
     
     /**
-     * 输入密码，由应用设置结果及脱机密码返回，EMVSDK实现判断返回值，进入流程下一步。
+     * 如果是联机，输入密码，由应用设置结果及计算PINBLOCK返回，EMVSDK实现判断返回值，进入流程下一步。
+     * 如果是脱机，那么EMVSDK内部处理，不判断返回值。
      * @param isOnlinePin 是否联机交易。
      * @param offlinePinLeftTimes 脱机密码剩余次数。
      * @return PINResult。

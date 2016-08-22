@@ -14,7 +14,7 @@ public class PINResult {
     /** 结果值*/
     private int resultCode;
     
-    /** 脱机密码*/
+    /** 联机密码PINBLOCK*/
     private byte[] pindata;
 
     /**
@@ -38,8 +38,8 @@ public class PINResult {
     }
 
     /**
-     * 获取脱机密码。
-     * @return 脱机密码 。
+     * 获取联机密码PINBLOCK。
+     * @return 联机密码 PINBLOCK。
      *
      */
     public byte[] getPindata() {
@@ -47,8 +47,8 @@ public class PINResult {
     }
 
     /**
-     * 设置脱机密码。
-     * @param pindata 脱机密码。
+     * 设置联机密码PINBLOCK。
+     * @param pindata 联机密码PINBLOCK。
      *
      */
     public void setPindata(byte[] pindata) {
