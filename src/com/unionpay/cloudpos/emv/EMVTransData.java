@@ -50,7 +50,7 @@ public class EMVTransData {
     private boolean isSupportEC;
 
     /** 是否执行CVM*/
-    private boolean isSupportCVM;
+    private boolean isSupportCVM=true;
 
     /** 流程类型，0x01：标准的授权过程；0x02：简易流程；0x03：qPBOC流程*/
     private int flow;
