@@ -37,6 +37,8 @@ import com.unionpay.cloudpos.TimeConstants;
  * 应用程序声明这个权限，可以调用{@link #encryptData(KeyInfo, byte[])}方法。
  * <li>&lt;uses-permission android:name="android.permission.CLOUDPOS_PIN_UPDATE_USER_KEY"/>，
  * 应用程序声明这个权限，可以调用{@link #updateUserKey(int, int, byte[],int, byte[])}及{@link #updateUserKey(int, int, byte[])}方法。
+ * <li>&lt;uses-permission android:name="android.permission.CLOUDPOS_PIN_UPDATE_MASTER_KEY"/>，
+ * 应用程序声明这个权限，可以调用{@link #updateMasterKey(int, byte[],byte[])}方法。
  * </ol>
  * <p>PIN输入设备可以是外接的，也可以是内置的。对于内置的情况，终端系统提供密码输入界面。
  * @see Device
