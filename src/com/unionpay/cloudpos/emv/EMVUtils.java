@@ -17,6 +17,8 @@ public class EMVUtils  implements EMVConstants{
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      */
     public static EMVAIDParam parseAIDParam(byte[] AIDParam) throws DeviceException {
+        if(AIDParam==null||AIDParam.length==0)
+            throw new DeviceException(DeviceException.ARGUMENT_EXCEPTION);
         AIDTable tmpAid = getEMVParamInfo(AIDParam);
         EMVAIDParam parseAIDParam = new EMVAIDParam();
 
@@ -125,6 +127,8 @@ public class EMVUtils  implements EMVConstants{
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。
      */
     public static EMVCAPKParam parseCAPKParam(byte[] CAPKParam) throws DeviceException {
+        if(CAPKParam==null||CAPKParam.length==0)
+            throw new DeviceException(DeviceException.ARGUMENT_EXCEPTION);
         EMVCAPKParam tmpEmvcapkParam = new EMVCAPKParam();
         CAPKTable tmpCapkTable = getCAPKParamInfo(CAPKParam);
         
@@ -166,8 +170,7 @@ public class EMVUtils  implements EMVConstants{
     	 
         return OutMap;
     }
-
-    private static AIDTable getEMVParamInfo(byte[] tmpdata)
+    public static AIDTable getEMVParamInfo(byte[] tmpdata)
     {
         AIDTable theAidTable = new AIDTable();
         byte[] data = new byte[tmpdata.length + 1];
@@ -180,72 +183,72 @@ public class EMVUtils  implements EMVConstants{
             int lowToHigh = ((data[i] & 0xFF) << 8) | (data[i + 1] & 0xFF);
             switch (lowToHigh)
             {
-                case 0x9F06:
-                    theAidTable.setAid(ByteUtil.arrayToHexStr(data, i3, data[i2]));
-                    break;
-                case 0xDF01:
-                    theAidTable.setNeedCompleteMatching(data[i3]);
-                    break;
-                case 0x9F08:
-                case 0x9F09:
-                    theAidTable.setAppVersionNumber(ByteUtil.arrayToHexStr(data, i3, data[i2]));
-                    break;
-                case 0xDF11:
-                    theAidTable.setTACDefault(ByteUtil.arrayToHexStr(data, i3, data[i2]));
-                    break;
-                case 0xDF12:
-                    theAidTable.setTACOnline(ByteUtil.arrayToHexStr(data, i3, data[i2]));
-                    break;
-                case 0xDF13:
-                    theAidTable.setTACDenial(ByteUtil.arrayToHexStr(data, i3, data[i2]));
-                    break;
-                case 0xDF14:
-                    theAidTable.setDefaultDDOL(ByteUtil.arrayToHexStr(data, i3, data[i2]));
-                    break;
-                case 0xDF15: // 有 NumberUtil.byte4ToInt(byte[] src, int offset)
-                             // 该多好!!! DuanCS@[20140708]
-                    byte[] thresholdValue = new byte[data[i2]];
-                    System.arraycopy(data, i3, thresholdValue, 0, thresholdValue.length);
-                    theAidTable.setThresholdValue(NumberUtil.byte4ToInt(thresholdValue));
-                    break;
-                case 0xDF16:
-                    theAidTable.setMaxTargetPercentage(data[i3]);
-                    break;
-                case 0xDF17:
-                    theAidTable.setTargetPercentage(data[i3]);
-                    break;
-                case 0xDF18:
-                    theAidTable.setSupportOnlinePin(data[i3]);
-                    break;
-                case 0xDF19: // 有 AppUtil.toAmount(byte[] src, int offset)
-                             // 该多好!!! DuanCS@[20140708]
-                    limitA = new byte[data[i2]]; // contactlessFloorLimit
-                    System.arraycopy(data, i3, limitA, 0, limitA.length);
-                    limit = AppUtil.toAmount(limitA);
-                    theAidTable.setContactlessFloorLimit(limit);
-                    break;
-                case 0xDF20:
-                    limitA = new byte[data[i2]]; // contactlessLimit
-                    System.arraycopy(data, i3, limitA, 0, limitA.length);
-                    limit = AppUtil.toAmount(limitA);
-                    theAidTable.setContactlessLimit(limit);
-                    break;
-                case 0xDF21:
-                    limitA = new byte[data[i2]]; // cvmLimit
-                    System.arraycopy(data, i3, limitA, 0, limitA.length);
-                    limit = AppUtil.toAmount(limitA);
-                    theAidTable.setCvmLimit(limit);
-                    break;
-                case 0x9F1B:
-                    limitA = new byte[data[i2]];
-                    System.arraycopy(data, i3, limitA, 0, limitA.length);
-                    theAidTable.setTermFloorLimit(NumberUtil.byte4ToInt(limitA));
-                    break;
-                case 0x9F7B:
-                    limitA = new byte[data[i2]];
-                    System.arraycopy(data, i3, limitA, 0, limitA.length);
-                    theAidTable.setUpcashTransLimit(AppUtil.toAmount(limitA));
-                    break;
+            case 0x9F06:
+                theAidTable.setAid(ByteUtil.arrayToHexStr(data, i3, data[i2]));
+                break;
+            case 0xDF01:
+                theAidTable.setNeedCompleteMatching(data[i3]);
+                break;
+            case 0x9F08:
+            case 0x9F09:
+                theAidTable.setAppVersionNumber(ByteUtil.arrayToHexStr(data, i3, data[i2]));
+                break;
+            case 0xDF11:
+                theAidTable.setTACDefault(ByteUtil.arrayToHexStr(data, i3, data[i2]));
+                break;
+            case 0xDF12:
+                theAidTable.setTACOnline(ByteUtil.arrayToHexStr(data, i3, data[i2]));
+                break;
+            case 0xDF13:
+                theAidTable.setTACDenial(ByteUtil.arrayToHexStr(data, i3, data[i2]));
+                break;
+            case 0xDF14:
+                theAidTable.setDefaultDDOL(ByteUtil.arrayToHexStr(data, i3, data[i2]));
+                break;
+            case 0xDF15: // 有 NumberUtil.byte4ToInt(byte[] src, int offset)
+                // 该多好!!! DuanCS@[20140708]
+                byte[] thresholdValue = new byte[data[i2]];
+                System.arraycopy(data, i3, thresholdValue, 0, thresholdValue.length);
+                theAidTable.setThresholdValue(NumberUtil.byte4ToInt(thresholdValue));
+                break;
+            case 0xDF16:
+                theAidTable.setMaxTargetPercentage(data[i3]);
+                break;
+            case 0xDF17:
+                theAidTable.setTargetPercentage(data[i3]);
+                break;
+            case 0xDF18:
+                theAidTable.setSupportOnlinePin(data[i3]);
+                break;
+            case 0xDF19: // 有 AppUtil.toAmount(byte[] src, int offset)
+                // 该多好!!! DuanCS@[20140708]
+                limitA = new byte[data[i2]]; // contactlessFloorLimit
+                System.arraycopy(data, i3, limitA, 0, limitA.length);
+                limit = AppUtil.toAmount(limitA);
+                theAidTable.setContactlessFloorLimit(limit);
+                break;
+            case 0xDF20:
+                limitA = new byte[data[i2]]; // contactlessLimit
+                System.arraycopy(data, i3, limitA, 0, limitA.length);
+                limit = AppUtil.toAmount(limitA);
+                theAidTable.setContactlessLimit(limit);
+                break;
+            case 0xDF21:
+                limitA = new byte[data[i2]]; // cvmLimit
+                System.arraycopy(data, i3, limitA, 0, limitA.length);
+                limit = AppUtil.toAmount(limitA);
+                theAidTable.setCvmLimit(limit);
+                break;
+            case 0x9F1B:
+                limitA = new byte[data[i2]];
+                System.arraycopy(data, i3, limitA, 0, limitA.length);
+                theAidTable.setTermFloorLimit(NumberUtil.byte4ToInt(limitA));
+                break;
+            case 0x9F7B:
+                limitA = new byte[data[i2]];
+                System.arraycopy(data, i3, limitA, 0, limitA.length);
+                theAidTable.setUpcashTransLimit(AppUtil.toAmount(limitA));
+                break;
             }
         }
         theAidTable.setTransReferCurrencyCode("0156");
@@ -257,7 +260,7 @@ public class EMVUtils  implements EMVConstants{
         return theAidTable;
     }
 
-    private static CAPKTable getCAPKParamInfo(byte[] data)
+    public static CAPKTable getCAPKParamInfo(byte[] data)
     {
         CAPKTable theCapkTable = new CAPKTable();
         byte[] tlvData = new byte[data.length];
@@ -293,4 +296,5 @@ public class EMVUtils  implements EMVConstants{
 
         return theCapkTable;
     }
+
 }

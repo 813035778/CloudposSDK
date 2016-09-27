@@ -257,11 +257,11 @@ public interface EMVConstants {
     /** 发卡行自定义数据FCI*/
     public static final int TAG_BF0C = 0xBF0C;
     
-    //EMV_SDK ERROR CODE
-    public static final int ERR_NO_OPEN					= 1001;
-    public static final int ERR_TERMINALINFO 			= 1002;
-    public static final int ERR_AID_SET					= 1003;
-    public static final int ERR_CAPK_SET				= 1004;
+//    //EMV_SDK ERROR CODE
+//    public static final int ERR_NO_OPEN					= 1001;
+//    public static final int ERR_TERMINALINFO 			= 1002;
+//    public static final int ERR_AID_SET					= 1003;
+//    public static final int ERR_CAPK_SET				= 1004;
     
     
     
@@ -281,5 +281,30 @@ public interface EMVConstants {
     /** 其他*/
     public static final String CERT_TYPE_QITA = "5";
     
+	// device state
+	final byte	DEVICE_CLOSED	= 0;
+	final byte	DEVICE_OPENED	= 1;
+	final byte  DEVICE_GET_CARD = 2;
     
+	static final byte	ERROR_NO_APP				=  1; // Selected Application do not in the Candidate List when Application Select
+	static final byte	ERROR_CARD_BLOCKED			=  2;
+	static final byte	ERROR_APP_SELECT			=  3; // Parse Card Returned Data Error when Application Select
+	static final byte	ERROR_INIT_APP				=  4; // card return 6A81 when Application Select
+	static final byte	ERROR_EXPIRED_CARD			=  5; // Error when Application Select
+	static final byte	ERROR_APP_DATA				=  6; // Application Interchange Profile(AIP) and Application File Locator(AFL) not exist when Initialize Application	
+	static final byte	ERROR_DATA_INVALID			=  7; // Error when Initialize Application Data
+	static final byte	ERROR_DATA_AUTH				=  8;
+	static final byte	ERROR_GEN_AC				=  9;
+	static final byte	ERROR_PROCESS_CMD			= 10; // Error when Read Application Data
+	static final byte	ERROR_SERVICE_NOT_ALLOWED	= 11; /** Service not Allowed */
+	static final byte	ERROR_PINENTERY_TIMEOUT		= 12; /** PIN Entry timeout */
+	static final byte	ERROR_OFFLINE_VERIFY		= 13; /** Check Offline PIN Error when Cardholder Verify */
+	static final byte	ERROR_NEED_ADVICE			= 14; /** Communication Error with Host, but the card need advice, halted the transaction */
+	static final byte	ERROR_USER_CANCELLED		= 15; /** User cancelled transaction  */
+	static final byte	ERROR_AMOUNT_OVER_LIMIT		= 16;
+	static final byte	ERROR_AMOUNT_ZERO			= 17;
+	static final byte	ERROR_OTHER_CARD			= 18;
+	static final byte	ERROR_MISSING_DATA			= 19;
+	static final byte	ERROR_APP_BLOCKED			= 20;
+	static final byte   ERROR_UNKNOW				= 21;
 }
