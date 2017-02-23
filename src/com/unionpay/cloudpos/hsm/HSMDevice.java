@@ -248,4 +248,14 @@ public interface HSMDevice extends Device{
      * @return     空间大小单位为byte。
      */
     long getFreeSpace() throws DeviceException;
+    /**
+     * 返回硬件序列号密文数据。
+     * <br>
+     * 该操作是独占的。
+     * 
+     * @param uniqueCode 硬件唯一标识码。
+     * @param randomFactor  随机因子。
+     * @return     硬件序列号密文数据。
+     */
+    String getEncryptedUniqueCode(String uniqueCode， String randomFactor) throws DeviceException;
 }
