@@ -47,4 +47,19 @@ public interface TerminalSpec {
      * @return 唯一标识
      */
     String getUniqueCode();
+    /**
+     * 返回FLash ID。
+     * @return Flash ID
+     */
+    String getFLashID();
+    /**
+     * 返回硬件版本号。
+     * @return hardwareVersion
+     */
+    String getHardwareVersion();
+	/**
+     * 返回模组版本号。
+     * @return ModuleVersion。
+     */
+    String getModuleVersion();
 }
