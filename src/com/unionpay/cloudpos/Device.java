@@ -78,5 +78,20 @@ public interface Device {
      *             </ul>
      */
     void cancelRequest() throws DeviceException;
-
+    
+    /**
+    * 获得设备使用总次数，次数返回后不清零。
+     *磁条卡使用次数指磁条卡的刷卡次数；
+     *IC卡和非接卡读卡器的使用次数指APDU指令的通讯次数；
+     * @return usageCount。
+     */
+    long getUsageCount();
+    
+    /**
+     * 获得设备使用失败次数，次数返回后不清零。
+     *磁条卡使用失败次数指磁条卡的刷卡失败次数；
+     *IC卡和非接卡读卡器的使用失败次数指APDU指令的通讯失败次数；
+     * @return failCount。
+     */
+    long getFailCount();
 }
