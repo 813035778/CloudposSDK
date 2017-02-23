@@ -42,4 +42,9 @@ public interface TerminalSpec {
      * @return 序列号
      */
     String getSerialNumber();
+    /**
+     * 返回终端唯一标识。
+     * @return 唯一标识
+     */
+    String getUniqueCode();
 }
