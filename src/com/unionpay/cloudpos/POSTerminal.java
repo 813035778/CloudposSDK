@@ -49,6 +49,8 @@ public abstract class POSTerminal {
 	public static final String DEVICE_NAME_SECONDARY_DISPLAY = "cloudpos.device.secondarydisplay";
 
 	public static final String DEVICE_NAME_EMV = "cloudpos.device.emv";
+	
+	public static final String DEVICE_NAME_SIGNATURE = "cloudpos.device.signature";
 
 	/**
 	 *  系统属性

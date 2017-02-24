@@ -7,6 +7,19 @@ import com.unionpay.cloudpos.OperationResult;
 import com.unionpay.cloudpos.TimeConstants;
 import com.unionpay.cloudpos.serialport.SerialPortOperationResult;
 
+/**
+ * <b>SignatureDevice</b>定义了签字设备的接口。
+ * <p>设备对象通过<code>POSTerminal</code>的对应方法获得，如下所示：
+ * <pre>
+ * SignatureDevice signatureDevice =
+ *         (SignatureDevice) POSTerminal.getInstance().getDevice("cloudpos.device.signature");
+ * </pre>
+ * 其中，"cloudpos.device.signature"是标识签字设备的字符串，由具体的实现定义。
+ * 为了正常访问签字设备，请在Android Manifest文件中设置签字设备的访问权限，具体如下所示：
+ * <pre> &lt;uses-permission android:name="android.permission.CLOUDPOS_SIGNATURE"/>
+ * </pre>
+ * @see Device
+ */
 public interface SignatureDevice extends Device{
     /**
      * 打开某个逻辑ID的签字设备
