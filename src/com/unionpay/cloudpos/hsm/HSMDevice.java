@@ -257,5 +257,5 @@ public interface HSMDevice extends Device{
      * @param randomFactor  随机因子。
      * @return     硬件序列号密文数据。
      */
-    String getEncryptedUniqueCode(String uniqueCode， String randomFactor) throws DeviceException;
+    String getEncryptedUniqueCode(String uniqueCode, String randomFactor) throws DeviceException;
 }
