@@ -1,6 +1,7 @@
 package com.up.testjavasdkdemo.util;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import android.text.format.Time;
 
@@ -52,4 +53,54 @@ public class CommonUtil {
 
 		return String.format("%04d%02d%02d%02d%02d%02d", year, month, day, hour, minute, second, Locale.getDefault());
 	}
+	
+	/**
+	 * 判断是否纯数字
+	 */
+	public static boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*");
+		return pattern.matcher(str).matches();
+	}
+	 /**
+     * 将输入hex类型的String 数据转为byte�?
+     * 
+     * @param src
+     *            输入String是Hex类型数据�?长度�?��2的整数�?
+     * @return byte型数�?
+     */
+    public static byte[] hexStr2Bytes(String hexSrc) {
+        if (hexSrc == null || hexSrc.length() == 0 || hexSrc.length() % 2 != 0)
+            return null;
+        int nSrcLen = hexSrc.length();
+        byte byteArrayResult[] = new byte[nSrcLen / 2];
+        for (int i = 0; i < hexSrc.length() - 1; i += 2) {
+            String strTemp = hexSrc.substring(i, i + 2);
+            byteArrayResult[i / 2] = (byte) Integer.parseInt(strTemp, 16);
+        }
+        return byteArrayResult;
+    }
+
+    /**
+     * 将输入hex类型的String 数据转为byte�?
+     * 
+     * @param hexSrc
+     * @param hexByte
+     * @return
+     */
+    public static int hexStr2Bytes(String hexSrc, byte[] hexByte) {
+        if (hexSrc == null || hexSrc.length() == 0 || hexSrc.length() % 2 != 0)
+            return 0;
+
+        int nSrcLen = hexSrc.length();
+
+        if (hexByte == null || hexByte.length < nSrcLen / 2)
+            return 0;
+
+        for (int i = 0; i < nSrcLen; i += 2) {
+            String strTemp = hexSrc.substring(i, i + 2);
+            hexByte[i / 2] = (byte) Integer.parseInt(strTemp, 16);
+        }
+        return nSrcLen / 2;
+    }
+
 }

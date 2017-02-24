@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="15"
         android:targetSdkVersion="19" />
-
+    <uses-permission android:name="android.permission.CLOUDPOS_EMV" />
+    
     <uses-permission android:name="android.permission.CLOUDPOS_MSR" />
     <!-- 打印机权限 -->
     <uses-permission android:name="android.permission.CLOUDPOS_PRINTER" />
