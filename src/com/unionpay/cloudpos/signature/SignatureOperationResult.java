@@ -8,7 +8,7 @@ public interface SignatureOperationResult extends OperationResult {
      * 
      * @return 签字buffer
      */
-    byte[] getSignature();
+    byte[] getSignatureCompressData();
     
     /**
      * 作电子签购单签名用途时，返回压缩数据长度
