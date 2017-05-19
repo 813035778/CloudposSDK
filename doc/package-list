@@ -11,4 +11,5 @@ com.unionpay.cloudpos.printer
 com.unionpay.cloudpos.rfcardreader
 com.unionpay.cloudpos.secondarydisplay
 com.unionpay.cloudpos.serialport
+com.unionpay.cloudpos.signature
 com.unionpay.cloudpos.smartcardreader

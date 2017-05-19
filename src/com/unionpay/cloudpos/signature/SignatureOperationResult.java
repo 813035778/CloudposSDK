@@ -1,5 +1,7 @@
 package com.unionpay.cloudpos.signature;
 
+import android.graphics.Bitmap;
+
 import com.unionpay.cloudpos.OperationResult;
 
 public interface SignatureOperationResult extends OperationResult {
