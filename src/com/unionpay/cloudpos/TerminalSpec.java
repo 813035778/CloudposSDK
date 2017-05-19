@@ -43,7 +43,7 @@ public interface TerminalSpec {
      */
     String getSerialNumber();
     /**
-     * 返回终端唯一标识。
+     * 返回终端唯一标识。21号文规定中的存量终端，返回null.
      * @return 唯一标识
      */
     String getUniqueCode();

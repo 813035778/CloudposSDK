@@ -77,7 +77,7 @@ public interface SignatureDevice extends Device{
      * @param timeout 超时
      * @return 操作结果<code>SignatureOperationResult</code>
      * @throws DeviceException 具体定义参考{@link DeviceException DeviceException}的文档。  
-     * @see SerialPortOperationResult
+     * @see SignatureOperationResult
      * @see TimeConstants#FOREVER
      * @see TimeConstants#IMMEDIATE
      */
