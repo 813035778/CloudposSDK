@@ -134,17 +134,28 @@ public interface HSMDevice extends Device{
     /**
      * 注入根证书接口。终端所有者证书，应用根证书和通讯根证书都是通过本方法注入。
      * <p>
-     * 所有根证书必需由终端所有者根证书签发。而且证书的keyUsage必须符合下面规则：
      * <ul>
-     * <li>{@link #CERT_TYPE_TERMINAL_OWNER} 终端所有者根证书的keyUsage标志：critical、KeyEncipherment、CertificateSign和CRLSign标识位必须被设置，其他标志不能设置。
-     * <li>{@link #CERT_TYPE_APP_ROOT} 终端应用根证书的keyUsage标志：critical、DigitalSignature、CertificateSign标识位必须被设置，其他标识位不能设置
-     * <li>{@link #CERT_TYPE_COMM_ROOT} 终端通讯根证书的keyUsage标志：DigitalSignature、KeyEncipherment和DataEncipherment标识位必须被设置，其他标识位不能设置。
+     * <li>终端所有者证书（Terminal Owner Root Cert）： 用于表明表示该终端属于哪个所有者，它是终端中其他根证书的签发人；在导入其他根证书时可以用它来进行验证，包括更新终端所有者证书自己。
+     * <li>应用根证书（App Root Cert）： 由终端所有者证书签发； 用于验证终端所有应用的根签名。 向终端安装的 apk 都必须由该证书签发，或者该证书的子证书签发（子证书需要包含在 apk 中）。
+     * <li>通讯根证书（SSL Comm Root Cert）： 由终端所有者证书签发； 用于在 SSL 连接时验证通讯服务器。
+     * </ul>
+     * 各种根证书的keyUsage中Is Critical和 9个 bit 字段必须符合下面定义：
+     * <ul>
+     * <li>{@link #CERT_TYPE_TERMINAL_OWNER} 终端所有者根证书的keyUsage标志：Is Critical(true)、KeyEncipherment、CertificateSign和CRLSign标识位必须被设置(1)，其他标志不能设置(0)。
+     * <li>{@link #CERT_TYPE_APP_ROOT} 终端应用根证书的keyUsage标志：Is Critical(true)、DigitalSignature、CertificateSign标识位必须被设置(1)，其他标识位不能设置(0)。
+     * <li>{@link #CERT_TYPE_COMM_ROOT} 终端通讯根证书的keyUsage标志：DigitalSignature、NonRepudiation和KeyEncipherment标识位必须被设置(1)，其他标识位不能设置(0)，Is Critical(false)。
      * </ul>
      * <p>
+     * 初始的各种根证书可以直接由厂商通过厂方工具注入。后续更新必须符合下面规则：
+     * <ul>
+     * <li> 终端所有者证书，代表了终端的所有者，任何其他的应用根证书、通讯根证书都必须是终端所有者证书签发后才能注入，并替换当前同样别名的证书。
+     * <li> 如果需要更新终端所有者证书，新的终端所有者证书也必须由原来的所有者证书签发，才能验证通过，并覆盖原证书。
+     * <li> 终端所有者证书、应用根证书和通讯根证书中的 keyUsage 信息域必须符合上面规定，防止无意或故意错用。
+     * </ul>
      * 该操作是独占的。
      *  
      * @param certType      证书类型：{@link #CERT_TYPE_TERMINAL_OWNER}, {@link #CERT_TYPE_APP_ROOT} 或者 {@link #CERT_TYPE_COMM_ROOT}.
-     * @param alias         证书别名。如果注入的是银联通讯根证书，那么别名为trust01；如果注入的是银联应用根证书，那么别名为unionpay01。
+     * @param alias         证书别名。银联的根证书名称请参考银联规范。第一批银联通讯根证书，别名为trust01；银联应用根证书，别名为unionpay01。
      * @param bufCert       证书数据流。
      * @param dataFormat    数据流格式，目前只支持{@link #CERT_FORMAT_PEM}。
      * @return {@code true} 成功。{@code false} 失败。
